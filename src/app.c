@@ -11,7 +11,7 @@ SDL_Renderer* global_renderer = NULL;
 SDL_Event global_event = { 0 };
 
 bool app_init(int width, int height, const char* name) {
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 1) {
 		printf("SDL Error: %s", SDL_GetError());
 		exit(1);
 	}
@@ -37,6 +37,7 @@ bool app_init(int width, int height, const char* name) {
 }
 
 bool app_should_close() {
+	
 	SDL_PollEvent(&global_event);
 	switch (global_event.type) {
 	case SDL_EVENT_QUIT:
@@ -44,6 +45,7 @@ bool app_should_close() {
 		break;
 	}
 
+	return false;
 }
 
 void app_quit() {
