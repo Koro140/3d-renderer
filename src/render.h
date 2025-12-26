@@ -3,7 +3,7 @@
 #include <inttypes.h>
 #include "point_math.h"
 
-typedef struct Color{
+typedef struct Color {
 	uint8_t r;
 	uint8_t g;
 	uint8_t b;
