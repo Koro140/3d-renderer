@@ -68,7 +68,7 @@ int main(void) {
       Point2D projectedTriangle[3];
 
       for (int j = 0; j < 3; j++) {
-	Point3D transformedPoint = translate_z(rotate_xz(rotate_yz(vertices[indices[i][j]], dz), dz),5.0f);
+	Point3D transformedPoint = translate_z(rotate_xz(rotate_yz(vertices[indices[i][j]], dz), dz),10.0f);
         Point2D projectedPoint = project(transformedPoint);
 	
 	projectedTriangle[j] = ndc_to_screen(projectedPoint,500,500);
