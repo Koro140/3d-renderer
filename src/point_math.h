@@ -1,5 +1,7 @@
 #pragma once
 
+// TODO: Add "Read Math" support (Matrices, vectors, etc....)
+
 typedef struct {
 	float x;
 	float y;
@@ -17,3 +19,5 @@ Point2D project(Point3D p);
 Point3D rotate_xz(Point3D p, float theta);
 Point3D rotate_yz(Point3D p, float theta);
 Point3D translate_z(Point3D p, float value);
+
+Point3D scale(Point3D p, float value);

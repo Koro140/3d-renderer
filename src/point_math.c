@@ -46,3 +46,11 @@ Point3D translate_z(Point3D p, float value) {
 		.z = p.z + value
 	};
 }
+
+Point3D scale(Point3D p, float value) {
+	return (Point3D) {
+		.x = p.x * value,
+		.y = p.y * value,
+		.z = p.z * value
+	};
+}

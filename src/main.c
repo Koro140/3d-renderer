@@ -5,56 +5,14 @@
 
 #include "render.h"
 #include "app.h"
-
-Point3D vertices[] = {
-	{ 1, 1, 1},
-	{ 1,-1, 1},
-	{-1,-1, 1},
-	{-1, 1, 1},
-
-	{ 1, 1,-1},
-	{ 1,-1,-1},
-	{-1,-1,-1},
-	{-1, 1,-1}
-};
-
-// triangles
-// triangles (12 total)
-int indices[][3] = {
-	// front (+Z)
-	{0, 1, 2},
-	{2, 3, 0},
-
-	// back (-Z)
-	{4, 6, 5},
-	{6, 4, 7},
-
-	// right (+X)
-	{0, 4, 5},
-	{5, 1, 0},
-
-	// left (-X)
-	{3, 2, 6},
-	{6, 7, 3},
-
-	// top (+Y)
-	{0, 3, 7},
-	{7, 4, 0},
-
-	// bottom (-Y)
-	{1, 5, 6},
-	{6, 2, 1}
-};
-
+#include "obj_parser.h"
 
 int main(void) {
 
-
-	app_init(500, 500, "Game");
-
-	const int triangles_count = sizeof(indices) / sizeof(int) / 3;
 	float dz = 0;
-
+	OBJ_object obj = obj_parse("teapot.obj");
+	
+	app_init(1000, 1000, "Game");
 	while (!app_should_close()) {
 
 		// Update here
@@ -63,15 +21,15 @@ int main(void) {
 		// Do rendering here:
 		render_clear(BLACK);
 
-		for (int i = 0; i < triangles_count; i++) {
+		for (int i = 0; i < obj.face_arr.faces_count; i++) {
 
 			Point2D projectedTriangle[3];
 
 			for (int j = 0; j < 3; j++) {
-				Point3D transformedPoint = translate_z(rotate_xz(rotate_yz(vertices[indices[i][j]], dz), dz), 10.0f);
+				Point3D transformedPoint = translate_z(rotate_yz(rotate_xz(rotate_yz(scale(obj.vertex_arr.vertices[obj.face_arr.faces[i].fi[j]], 5.0f), dz), dz),-1), 30.0f);
 				Point2D projectedPoint = project(transformedPoint);
 
-				projectedTriangle[j] = ndc_to_screen(projectedPoint, 500, 500);
+				projectedTriangle[j] = ndc_to_screen(projectedPoint, 1000, 1000);
 			}
 
 			render_triangle(
@@ -84,6 +42,7 @@ int main(void) {
 
 		render_present();
 	}
+	obj_free(obj);
 	app_quit();
 	return 0;
 }
