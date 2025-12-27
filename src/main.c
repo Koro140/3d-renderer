@@ -10,7 +10,7 @@
 int main(void) {
 
 	float dz = 0;
-	OBJ_object obj = obj_parse("teapot.obj");
+	OBJ_object obj = obj_parse(ASSETS_FOLDER "teapot.obj");
 	
 	app_init(1000, 1000, "Game");
 	while (!app_should_close()) {

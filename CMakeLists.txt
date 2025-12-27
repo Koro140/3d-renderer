@@ -5,6 +5,9 @@ project(app C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
+# ASSETS FOLDER MACRO
+add_compile_definitions(ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/assets/")
+
 # ---------- SDL options (IMPORTANT) ----------
 # Disable things you don't need to speed up build
 set(SDL_SHARED OFF CACHE BOOL "" FORCE)
