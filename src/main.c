@@ -8,11 +8,12 @@
 #include "obj_parser.h"
 
 int main(void) {
-
+	const int screen_width = 500;
+	const int screen_height = 500;
 	float dz = 0;
 	OBJ_object obj = obj_parse(ASSETS_FOLDER "teapot.obj");
 	
-	app_init(1000, 1000, "Game");
+	app_init(500, 500, "Game");
 	while (!app_should_close()) {
 
 		// Update here
@@ -29,7 +30,7 @@ int main(void) {
 				Point3D transformedPoint = translate_z(rotate_yz(rotate_xz(rotate_yz(scale(obj.vertex_arr.vertices[obj.face_arr.faces[i].fi[j]], 5.0f), dz), dz),-1), 30.0f);
 				Point2D projectedPoint = project(transformedPoint);
 
-				projectedTriangle[j] = ndc_to_screen(projectedPoint, 1000, 1000);
+				projectedTriangle[j] = ndc_to_screen(projectedPoint, screen_width, screen_height);
 			}
 
 			render_triangle(

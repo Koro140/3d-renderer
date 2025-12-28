@@ -16,7 +16,7 @@ bool app_init(int width, int height, const char* name) {
 		exit(1);
 	}
 
-	SDL_Window* window = SDL_CreateWindow("Hello window", width, height, SDL_WINDOW_OPENGL);
+	SDL_Window* window = SDL_CreateWindow(name, width, height, SDL_WINDOW_OPENGL);
 	if (window == NULL) {
 		printf("SDL Error: %s", SDL_GetError());
 		exit(1);
