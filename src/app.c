@@ -6,12 +6,12 @@
 #include <stdlib.h>
 
 // the global instance of the app
-SDL_Window* global_window = NULL;
-SDL_Renderer* global_renderer = NULL;
-SDL_Event global_event = { 0 };
+static SDL_Window* global_window = NULL;
+static SDL_Renderer* global_renderer = NULL;
+static SDL_Event global_event = { 0 };
 
-bool app_init(int width, int height, const char* name) {
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 1) {
+void app_init(int width, int height, const char* name) {
+	if (SDL_Init(SDL_INIT_VIDEO) != 1) {
 		printf("SDL Error: %s", SDL_GetError());
 		exit(1);
 	}
@@ -33,7 +33,6 @@ bool app_init(int width, int height, const char* name) {
 
 	global_window = window;
 	global_renderer = renderer;
-
 }
 
 bool app_should_close() {

@@ -5,19 +5,19 @@
 typedef struct {
 	float x;
 	float y;
-}Point2D;
+}Vector2;
 
 typedef struct {
 	float x;
 	float y;
 	float z;
-}Point3D;
+}Vector3;
 
-Point2D ndc_to_screen(Point2D p, int screen_width, int screen_height);
-Point2D project(Point3D p);
+Vector2 ndc_to_screen(Vector2 p, int screen_width, int screen_height);
+Vector2 project(Vector3 p);
 
-Point3D rotate_xz(Point3D p, float theta);
-Point3D rotate_yz(Point3D p, float theta);
-Point3D translate_z(Point3D p, float value);
+Vector3 rotate_xz(Vector3 p, float theta);
+Vector3 rotate_yz(Vector3 p, float theta);
+Vector3 translate_z(Vector3 p, float value);
 
-Point3D scale(Point3D p, float value);
+Vector3 scale(Vector3 p, float value);

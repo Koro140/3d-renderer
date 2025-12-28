@@ -24,11 +24,10 @@ int main(void) {
 
 		for (int i = 0; i < obj.face_arr.faces_count; i++) {
 
-			Point2D projectedTriangle[3];
-
+			Vector2 projectedTriangle[3];
 			for (int j = 0; j < 3; j++) {
-				Point3D transformedPoint = translate_z(rotate_yz(rotate_xz(rotate_yz(scale(obj.vertex_arr.vertices[obj.face_arr.faces[i].fi[j]], 5.0f), dz), dz),-1), 30.0f);
-				Point2D projectedPoint = project(transformedPoint);
+				Vector3 transformedPoint = translate_z(rotate_yz(rotate_xz(rotate_yz(scale(*obj_vertex_index(&obj, i,j), 5.0f), dz), dz), -1), 30.0f);
+				Vector2 projectedPoint = project(transformedPoint);
 
 				projectedTriangle[j] = ndc_to_screen(projectedPoint, screen_width, screen_height);
 			}

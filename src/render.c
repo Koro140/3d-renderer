@@ -16,7 +16,7 @@ void render_clear(Color color) {
 	SDL_RenderClear(global_renderer);
 }
 
-void render_point(Point2D p, Color color) {
+void render_point(Vector2 p, Color color) {
 	const float width = 10;
 	const float height = 10;
 
@@ -26,7 +26,7 @@ void render_point(Point2D p, Color color) {
 	SDL_RenderFillRect(global_renderer, &rect);
 }
 
-void render_triangle(Point2D p0, Point2D p1, Point2D p2, Color color) {
+void render_triangle(Vector2 p0, Vector2 p1, Vector2 p2, Color color) {
 	render_set_color(color);
 	SDL_RenderLine(global_renderer, p0.x, p0.y, p1.x, p1.y);
 	SDL_RenderLine(global_renderer, p1.x, p1.y, p2.x, p2.y);

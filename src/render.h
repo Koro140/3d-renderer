@@ -17,7 +17,7 @@ typedef struct Color {
 void render_init(void* renderer);
 
 void render_set_color(Color color);
-void render_point(Point2D p, Color color);
+void render_point(Vector2 p, Color color);
 void render_clear(Color color);
 void render_present();
-void render_triangle(Point2D p0, Point2D p1, Point2D p2, Color color);
+void render_triangle(Vector2 p0, Vector2 p1, Vector2 p2, Color color);

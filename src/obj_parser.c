@@ -38,14 +38,14 @@ void append_faces_arr(Face_Arr* farr, Face f) {
 	farr->faces_count++;
 }
 
-void append_points_arr(Vertex_Arr* parr, Point3D p) {
+void append_points_arr(Vertex_Arr* parr, Vector3 p) {
 	if (parr->vertices_count >= parr->vertices_capacity)
 	{
 		// resize
 		if (parr->vertices_count == 0)
 		{
 			parr->vertices_capacity = INITIAL_ARR_SIZE;
-			parr->vertices = malloc(sizeof(Point3D) * INITIAL_ARR_SIZE);
+			parr->vertices = malloc(sizeof(Vector3) * INITIAL_ARR_SIZE);
 			if (parr->vertices == NULL)
 			{
 				printf("Memory Error : can't allocate memory\n");
@@ -55,7 +55,7 @@ void append_points_arr(Vertex_Arr* parr, Point3D p) {
 		else
 		{
 			parr->vertices_capacity *= 2;
-			Point3D* newMem = realloc(parr->vertices, sizeof(Point3D) * parr->vertices_capacity);
+			Vector3* newMem = realloc(parr->vertices, sizeof(Vector3) * parr->vertices_capacity);
 
 			if (newMem == NULL)
 			{
@@ -97,7 +97,7 @@ OBJ_object obj_parse(const char* filePath) {
 	}
 
 	char line[256];
-	Point3D vertex;
+	Vector3 vertex;
 	int face[3];
 
 	while (fgets(line, sizeof(line), f)) 
@@ -163,4 +163,8 @@ void obj_free(OBJ_object obj) {
 	{
 		free(obj.vertex_arr.vertices);
 	}
+}
+
+Vector3* obj_vertex_index(OBJ_object* obj, int face, int point) {
+	return &(obj->vertex_arr.vertices[obj->face_arr.faces[face].fi[point]]);
 }
