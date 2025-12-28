@@ -165,6 +165,6 @@ void obj_free(OBJ_object obj) {
 	}
 }
 
-Vector3* obj_vertex_index(OBJ_object* obj, int face, int point) {
-	return &(obj->vertex_arr.vertices[obj->face_arr.faces[face].fi[point]]);
+Vector3 obj_vertex_index(OBJ_object* obj, int face, int point) {
+	return (obj->vertex_arr.vertices[obj->face_arr.faces[face].fi[point]]);
 }

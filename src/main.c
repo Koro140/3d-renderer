@@ -10,14 +10,21 @@
 int main(void) {
 	const int screen_width = 500;
 	const int screen_height = 500;
-	float dz = 0;
+	float angle = 0;
 	OBJ_object obj = obj_parse(ASSETS_FOLDER "teapot.obj");
-	
+
+	// Some calculations before the main loop
+	Vector3 scalarVec = { 5.0f, -5.0f, 5.0f };
+	Vector3 translationVec = { 0, 10.0f, 30.0f };
+	Mat3x3 rotY = mat3x3_rotate_y(angle);
+
 	app_init(500, 500, "Game");
+
 	while (!app_should_close()) {
 
 		// Update here
-		dz += 0.001f;
+		angle += 0.001f;
+		rotY = mat3x3_rotate_y(angle);
 
 		// Do rendering here:
 		render_clear(BLACK);
@@ -26,7 +33,12 @@ int main(void) {
 
 			Vector2 projectedTriangle[3];
 			for (int j = 0; j < 3; j++) {
-				Vector3 transformedPoint = translate_z(rotate_yz(rotate_xz(rotate_yz(scale(*obj_vertex_index(&obj, i,j), 5.0f), dz), dz), -1), 30.0f);
+
+				// Complexety to look cool
+				Vector3 transformedPoint = vec3_translate(
+					vec3_mul_mat3(vec3_scale(obj_vertex_index(&obj, i, j), scalarVec), rotY),
+					translationVec);
+
 				Vector2 projectedPoint = project(transformedPoint);
 
 				projectedTriangle[j] = ndc_to_screen(projectedPoint, screen_width, screen_height);

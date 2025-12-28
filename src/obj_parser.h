@@ -25,4 +25,4 @@ OBJ_object obj_parse(const char* filePath);
 void obj_free(OBJ_object obj);
 
 // Return index of current (Every face has 3 points ... for now)
-Vector3* obj_vertex_index(OBJ_object* obj, int face, int point);
+Vector3 obj_vertex_index(OBJ_object* obj, int face, int point);
