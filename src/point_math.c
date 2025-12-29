@@ -1,6 +1,7 @@
 #include "point_math.h"
 #include <math.h>
 
+
 // Vector2 definitions
 Vector2 ndc_to_screen(Vector2 v, int screen_width, int screen_height) {
 	return (Vector2) {
@@ -24,6 +25,10 @@ Vector2 project(Vector3 v) {
 Vector3 vec3(float v)
 {
 	return (Vector3) {v,v,v};
+}
+
+Vector3 vec3_from_vec4(Vector4 v) {
+	return (Vector3) {v.x,v.y,v.z};
 }
 
 Vector3 vec3_translate(Vector3 v, Vector3 trans)
@@ -51,6 +56,11 @@ Vector3 vec3_mul_mat3(Vector3 v, Mat3x3 m)
 Vector4 vec4(float v)
 {
 	return (Vector4) { v, v, v, v };
+}
+
+Vector4 vec4_from_vec3(Vector3 v)
+{
+    return (Vector4) { v.x, v.y, v.z, 1 };
 }
 
 Vector4 vec4_translate(Vector4 v, Vector4 trans)
@@ -147,6 +157,25 @@ Mat4x4 mat4x4_identity()
         {0,0,1,0},
         {0,0,0,1}
     } };
+    return m;
+}
+
+Mat4x4 mat4x4_projection(float fov,float f, float n) {
+    const float DEG_TO_RAD = (atan(1) * 4) / 180;
+    float s = 1 / tan((fov / 2) * DEG_TO_RAD);
+
+    /*Mat4x4 m = { {
+        {s,0,               0, 0},
+        {0,s,               0, 0},
+        {0,0,  -(f) / (f - n),-1},
+        {0,0,-(f*n) / (f - n), 0}
+    } };*/
+
+    Mat4x4 m = mat4x4_identity();
+    m.m[0][0] = m.m[1][1] = s;
+    m.m[2][2] = -f / (f - n);
+    m.m[2][3] = -1;
+    m.m[3][2] = -f * n / (f - n);
     return m;
 }
 

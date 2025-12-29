@@ -36,6 +36,8 @@ Vector2 project(Vector3 p);
 // Vector3 Functions
 //
 Vector3 vec3(float v);
+Vector3 vec3_from_vec4(Vector4 v);
+
 Vector3 vec3_scale(Vector3 v, Vector3 scalar);
 Vector3 vec3_mul_mat3(Vector3 v, Mat3x3 m);
 Vector3 vec3_translate(Vector3 v, Vector3 trans);
@@ -45,6 +47,8 @@ Vector3 vec3_mul_mat3(Vector3 v, Mat3x3 mat);
 // Vector4 functions
 //
 Vector4 vec4(float v);
+Vector4 vec4_from_vec3(Vector3 v);
+
 Vector4 vec4_translate(Vector4 v, Vector4 trans);
 Vector4 vec4_scale(Vector4 v, Vector4 scalar);
 Vector4 vec4_mul_mat4(Vector4 v, Mat4x4 m);
@@ -63,6 +67,7 @@ Mat3x3 mat3x3_mul(Mat3x3 a, Mat3x3 b);
 // Mat4x4 functions
 //
 Mat4x4 mat4x4_identity();
+Mat4x4 mat4x4_projection(float fov, float f, float n);
 Mat4x4 mat4x4_translate(Vector3 t);
 Mat4x4 mat4x4_scale(Vector3 s);
 Mat4x4 mat4x4_rotate_x(float angle);
