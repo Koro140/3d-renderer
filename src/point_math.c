@@ -31,6 +31,24 @@ Vector3 vec3_from_vec4(Vector4 v) {
 	return (Vector3) {v.x,v.y,v.z};
 }
 
+Vector3 vec3_add(Vector3 v1, Vector3 v2) {
+	return (Vector3) { v1.x + v2.x, v1.y + v2.y, v1.z + v2.z };
+}
+
+Vector3 vec3_normalize(Vector3 v) {
+    float len = sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
+    if (len == 0)
+    {
+        return v;
+    }
+    float inv = 1 / len;
+    v.x *= inv;
+    v.y *= inv;
+    v.z *= inv;
+
+    return v;
+}
+
 Vector3 vec3_translate(Vector3 v, Vector3 trans)
 {
 	return (Vector3) { v.x + trans.x, v.y + trans.y, v.z + trans.z };

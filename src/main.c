@@ -8,19 +8,19 @@
 #include "obj_parser.h"
 
 int main(void) {
-	const int screen_width = 500;
-	const int screen_height = 500;
+	const int screen_width = 720;
+	const int screen_height = 720;
 
 	float angle = 0;
 	Vector3 scalar_vec = { 5.0f, 5.0f, 5.0f };
-	Vector3 translation_vec = { 0, -10.0f, 30.0f };
+	Vector3 translation_vec = { 0, -10.0f, 10.0f };
 	Mat3x3 rotY = mat3x3_rotate_y(angle);
 
 	Mat4x4 projection_mat = mat4x4_projection(90, 10000, 0.01);
 	
 	OBJ_object obj = obj_parse(ASSETS_FOLDER "teapot.obj");
 	
-	app_init(500, 500, "Game");
+	app_init(screen_width, screen_height, "Game");
 	while (!app_should_close()) {
 
 		// Update here
